@@ -4,6 +4,7 @@ const API_URL = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.
 const API_SHOW_URL = 'https://api.themoviedb.org/3/discover/tv?&api_key=fba3ee42ab0dd8e5893075f1479d083b';
 const IMG_PATH = 'https://image.tmdb.org/t/p/w1280';
 const SEARCH_API = 'https://api.themoviedb.org/3/search/movie?api_key=fba3ee42ab0dd8e5893075f1479d083b&query="';
+const SEARCH_SHOW_API = 'https://api.themoviedb.org/3/search/tv?api_key=fba3ee42ab0dd8e5893075f1479d083b&query="';
 const form = document.getElementById('form');
 const search = document.getElementById('search');
 const main = document.getElementById('main');
@@ -11,10 +12,12 @@ const header = document.getElementById('header');
 // Get initial Movies
 getMovies(API_URL)
 document.querySelector('.show').addEventListener('click',()=>{
+    search.placeholder = 'TV Show Search'
     getTvShows(API_SHOW_URL);
 });
 
 document.querySelector('.movie-list').addEventListener('click',()=>{
+    search.placeholder = 'Movies Search'
     getMovies(API_URL);
 });
 async function getMovies(url) {
@@ -32,6 +35,10 @@ async function getTvShows(url) {
 
 function showMovies(movies) {
     main.innerHTML = '';
+    main.classList.remove('movies');
+    main.classList.remove('tv-show');
+    main.classList.add('movies');
+
     movies.forEach((movie) => {
         const {title, poster_path, vote_average, overview} = movie;
         const movieEl = document.createElement('div');
@@ -55,6 +62,9 @@ function showMovies(movies) {
 
 function showTvShows(show) {
     main.innerHTML = '';
+    main.classList.remove('tv-show');
+    main.classList.remove('movies');
+    main.classList.add('tv-show');
     show.forEach((show) => {
         const {original_name, poster_path, vote_average, overview} = show;
         const showEl = document.createElement('div');
@@ -86,9 +96,16 @@ form.addEventListener('submit', (event) => {
     event.preventDefault();
     const searchTerm = search.value;
     if (searchTerm && searchTerm !== '') {
-        getMovies(SEARCH_API + searchTerm);
+        if (main.classList.contains('movies')) {
+            getMovies(SEARCH_API + searchTerm);
+        }
+        else if (main.classList.contains('tv-show')) {
+            getTvShows(SEARCH_SHOW_API + searchTerm)
+        }
         search.value = '';
     } else {
         window.location.reload();
     }
 })
+main.classList.add('movies')
+search.placeholder = main.classList.contains('movies') ? 'Movies Search' :'TV Show Search';
