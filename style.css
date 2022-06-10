@@ -94,3 +94,32 @@
 .movie:hover .overview{
     transform: translateY(0);
 }
+
+.show {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    border-radius: 50px;
+    font-family: inherit;
+    font-szie : 1rem;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    position: absolute;
+    left: 20px;
+    width: 80px;
+    height: 40px;
+    margin: auto;
+}
+.movie-list {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    border-radius: 50px;
+    font-family: inherit;
+    font-szie : 1rem;
+    padding: 0.5rem 1rem;
+    color: #fff;
+    position: absolute;
+    left: 105px;
+    width: 85px;
+    height: 40px;
+    margin: auto;
+}

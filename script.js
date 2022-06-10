@@ -1,7 +1,7 @@
 'use strict';
 
 const API_URL = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=fba3ee42ab0dd8e5893075f1479d083b';
-
+const API_SHOW_URL = 'https://api.themoviedb.org/3/discover/tv?&api_key=fba3ee42ab0dd8e5893075f1479d083b';
 const IMG_PATH = 'https://image.tmdb.org/t/p/w1280';
 const SEARCH_API = 'https://api.themoviedb.org/3/search/movie?api_key=fba3ee42ab0dd8e5893075f1479d083b&query="';
 const form = document.getElementById('form');
@@ -10,12 +10,25 @@ const main = document.getElementById('main');
 const header = document.getElementById('header');
 // Get initial Movies
 getMovies(API_URL)
+document.querySelector('.show').addEventListener('click',()=>{
+    getTvShows(API_SHOW_URL);
+});
 
+document.querySelector('.movie-list').addEventListener('click',()=>{
+    getMovies(API_URL);
+});
 async function getMovies(url) {
     const res = await fetch(url);
     const data = await res.json();
     showMovies(data.results);
 }
+
+async function getTvShows(url) {
+    const res = await fetch(url);
+    const data = await res.json();
+    showTvShows(data.results);
+}
+
 
 function showMovies(movies) {
     main.innerHTML = '';
@@ -40,12 +53,34 @@ function showMovies(movies) {
     });
 }
 
+function showTvShows(show) {
+    main.innerHTML = '';
+    show.forEach((show) => {
+        const {original_name, poster_path, vote_average, overview} = show;
+        const showEl = document.createElement('div');
+        showEl.classList.add('movie');
+        showEl.innerHTML = `
+    <img src="${IMG_PATH + poster_path}" alt="${original_name}">
+    <div class="movie-info">
+        <h3> ${original_name}</h3>
+        <span class="${getClassByRate(vote_average)}">${vote_average}</span>
+    </div>
+    <div class="overview">
+        <h3>
+            OverView
+        </h3>
+       ${overview}
+    </div>
+    `
+        main.appendChild(showEl);
+    });
+}
+
 function getClassByRate(vote) {
     return  vote >= 7 ? 'green' : vote >=5 ? 'orange' :'red';
 }
 function getMovieDetail(){
     main.innerHTML = '';
-
 }
 form.addEventListener('submit', (event) => {
     event.preventDefault();
