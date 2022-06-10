@@ -7,6 +7,7 @@ const SEARCH_API = 'https://api.themoviedb.org/3/search/movie?api_key=fba3ee42ab
 const form = document.getElementById('form');
 const search = document.getElementById('search');
 const main = document.getElementById('main');
+const header = document.getElementById('header');
 // Get initial Movies
 getMovies(API_URL)
 
@@ -23,7 +24,7 @@ function showMovies(movies) {
         const movieEl = document.createElement('div');
         movieEl.classList.add('movie');
         movieEl.innerHTML = `
-    <img src="${IMG_PATH + poster_path}" alt="${title}">
+    <img src="${IMG_PATH + poster_path}" alt="${title}" onclick="getMovieDetail()">
     <div class="movie-info">
         <h3> ${title}</h3>
         <span class="${getClassByRate(vote_average)}">${vote_average}</span>
@@ -40,14 +41,12 @@ function showMovies(movies) {
 }
 
 function getClassByRate(vote) {
-    if (vote >= 7)
-    return 'green';
-    else if(vote>=5)
-        return 'orange';
-    else
-        return 'red';
+    return  vote >= 7 ? 'green' : vote >=5 ? 'orange' :'red';
 }
+function getMovieDetail(){
+    main.innerHTML = '';
 
+}
 form.addEventListener('submit', (event) => {
     event.preventDefault();
     const searchTerm = search.value;
