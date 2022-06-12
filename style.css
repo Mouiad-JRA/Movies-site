@@ -53,6 +53,7 @@
  }
  .movie img {
      width: 100%;
+     cursor: pointer;
  }
  .movie-info{
      color: #eee;
@@ -108,6 +109,7 @@
     width: 80px;
     height: 40px;
     margin: auto;
+    cursor: pointer;
 }
 .movie-list {
     background-color: transparent;
@@ -122,4 +124,5 @@
     width: 85px;
     height: 40px;
     margin: auto;
+    cursor: pointer;
 }
