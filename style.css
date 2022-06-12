@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap');
 
 :root {
-    --primary-color: #22254b;
-    --secondary-color: #373b69;
+    --primary-color: #141420;
+    --secondary-color: #27273f;
 }
 
 * {
@@ -142,11 +142,10 @@
     resize: none;
 }
 @media (max-width: 900px) {
-   .detail {
-      left: 180px;
-       font-size: small;
-       top: 250px;
-       /*display: contents;*/
+    .detail {
+        left: 180px;
+        font-size: small;
+        top: 250px;
     }
 }
 
@@ -168,4 +167,10 @@
     .movie-info{
         display: contents;
     }
+}
+@media (max-width: 900px) {
+    .search  {
+        max-width: 250px;
+    }
+
 }
