@@ -29,23 +29,31 @@ const detail = function (title, poster_path, vote_average, overview){
     movieEl.classList.add('movie');
     const overView = document.createElement('div');
     overView.classList.add('detail');
+    const rate = document.createElement('div');
+    rate.classList.add('over');
+    console.log(getClassByRate(vote_average))
+    rate.innerHTML = `
+    <div class="movie-info">
+        <h1 class="${getClassByRate(vote_average)}"> ${title}</h1>
+        <br>    
+        <span class="${getClassByRate(vote_average)}">${vote_average}</span>
+    </div>
+    `
     overView.innerHTML = `
         <div >
-        <h3>
+        <h1>
             OverView
-        </h3>
+        </h1>
        ${overview}
     `
     movieEl.innerHTML = `
-<img class ='movie-img' style="width: 100%; cursor: default" src="${IMG_PATH + poster_path}" alt="${title}">
-<div class="movie-info">
-    <h3> ${title}</h3>
-    <span class="${getClassByRate(vote_average)}">${vote_average}</span>
-</div>
-    </div>
+<img class ='movie-img' style="width: 100%; cursor: default; height: 100%" src="${IMG_PATH + poster_path}" alt="${title}">
+
+ 
 `
     main.appendChild(movieEl);
-    main.appendChild(overView)
+    main.appendChild(overView);
+    main.appendChild(rate);
 };
 
 

@@ -126,16 +126,46 @@
     margin: auto;
     cursor: pointer;
 }
-
 .detail {
+    display: grid;
+    align-items: center;
+    justify-content: space-between;
     background-color: #373b69;
+    padding: 20px;
+    position: absolute;
+    left : 450px;
+    right: 100px;
+    top: 200px;
+    color: white;
+    border-radius: 20px;
+    min-width: 300px;
+    resize: none;
+}
+@media (max-width: 900px) {
+   .detail {
+      left: 180px;
+       font-size: small;
+       top: 250px;
+       /*display: contents;*/
+    }
+}
+
+
+.over {
     padding: 2rem;
     position: absolute;
-    left : 500px;
-    right: 500px;
-    top: 250px;
-    max-height: 100%;
-    color: white;
-
+    left : 400px;
+    top: 40px;
+    box-sizing: border-box;
     border-radius: 20px;
+    font-family: inherit;
+}
+
+@media (max-width: 900px) {
+    .over {
+        display: contents;
+    }
+    .movie-info{
+        display: contents;
+    }
 }
