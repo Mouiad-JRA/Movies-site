@@ -20,6 +20,30 @@ document.querySelector('.movie-list').addEventListener('click',()=>{
     search.placeholder = 'Movies Search'
     getMovies(API_URL);
 });
+
+const detail = function (title, poster_path, vote_average, overview){
+    main.innerHTML = '';
+    main.classList.remove('movies');
+    main.classList.remove('tv-show');
+    const movieEl = document.createElement('div');
+    movieEl.classList.add('movie');
+    movieEl.innerHTML = `
+<img class ='movie-img' src="${IMG_PATH + poster_path}" alt="${title}">
+<div class="movie-info">
+    <h3> ${title}</h3>
+    <span class="${getClassByRate(vote_average)}">${vote_average}</span>
+</div>
+<div class="overview">
+    <h3>
+        OverView
+    </h3>
+   ${overview}
+</div>
+`
+    main.appendChild(movieEl);
+};
+
+
 async function getMovies(url) {
     const res = await fetch(url);
     const data = await res.json();
@@ -44,7 +68,7 @@ function showMovies(movies) {
         const movieEl = document.createElement('div');
         movieEl.classList.add('movie');
         movieEl.innerHTML = `
-    <img src="${IMG_PATH + poster_path}" alt="${title}" onclick="getMovieDetail()">
+    <img class ='movie-img' src="${IMG_PATH + poster_path}" alt="${title}" onclick="detail('${title}', '${poster_path}','${vote_average}','${overview}')">
     <div class="movie-info">
         <h3> ${title}</h3>
         <span class="${getClassByRate(vote_average)}">${vote_average}</span>
@@ -70,7 +94,7 @@ function showTvShows(show) {
         const showEl = document.createElement('div');
         showEl.classList.add('movie');
         showEl.innerHTML = `
-    <img src="${IMG_PATH + poster_path}" alt="${original_name}">
+    <img src="${IMG_PATH + poster_path}" alt="${original_name}" onclick="detail('${original_name}', '${poster_path}','${vote_average}','${overview}')">
     <div class="movie-info">
         <h3> ${original_name}</h3>
         <span class="${getClassByRate(vote_average)}">${vote_average}</span>
