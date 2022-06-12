@@ -126,3 +126,16 @@
     margin: auto;
     cursor: pointer;
 }
+
+.detail {
+    background-color: #373b69;
+    padding: 2rem;
+    position: absolute;
+    left : 500px;
+    right: 500px;
+    top: 250px;
+    max-height: 100%;
+    color: white;
+
+    border-radius: 20px;
+}

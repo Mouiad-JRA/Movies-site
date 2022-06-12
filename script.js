@@ -27,20 +27,25 @@ const detail = function (title, poster_path, vote_average, overview){
     main.classList.remove('tv-show');
     const movieEl = document.createElement('div');
     movieEl.classList.add('movie');
+    const overView = document.createElement('div');
+    overView.classList.add('detail');
+    overView.innerHTML = `
+        <div >
+        <h3>
+            OverView
+        </h3>
+       ${overview}
+    `
     movieEl.innerHTML = `
-<img class ='movie-img' src="${IMG_PATH + poster_path}" alt="${title}">
+<img class ='movie-img' style="width: 100%; cursor: default" src="${IMG_PATH + poster_path}" alt="${title}">
 <div class="movie-info">
     <h3> ${title}</h3>
     <span class="${getClassByRate(vote_average)}">${vote_average}</span>
 </div>
-<div class="overview">
-    <h3>
-        OverView
-    </h3>
-   ${overview}
-</div>
+    </div>
 `
     main.appendChild(movieEl);
+    main.appendChild(overView)
 };
 
 
