@@ -1,6 +1,7 @@
 'use strict';
 
 const API_URL = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&api_key=fba3ee42ab0dd8e5893075f1479d083b';
+const API_URL_TRENDING = 'https://api.themoviedb.org/4/list/2?page=1&api_key=fba3ee42ab0dd8e5893075f1479d083b&sort_by=title.asc';
 const API_SHOW_URL = 'https://api.themoviedb.org/3/discover/tv?&api_key=fba3ee42ab0dd8e5893075f1479d083b';
 const IMG_PATH = 'https://image.tmdb.org/t/p/w1280';
 const SEARCH_API = 'https://api.themoviedb.org/3/search/movie?api_key=fba3ee42ab0dd8e5893075f1479d083b&query="';
@@ -10,7 +11,7 @@ const search = document.getElementById('search');
 const main = document.getElementById('main');
 const header = document.getElementById('header');
 // Get initial Movies
-getMovies(API_URL)
+getMovies(API_URL_TRENDING);
 document.querySelector('.show').addEventListener('click',()=>{
     search.placeholder = 'TV Show Search'
     getTvShows(API_SHOW_URL);
@@ -18,7 +19,7 @@ document.querySelector('.show').addEventListener('click',()=>{
 
 document.querySelector('.movie-list').addEventListener('click',()=>{
     search.placeholder = 'Movies Search'
-    getMovies(API_URL);
+    getMovies(API_URL_TRENDING);
 });
 
 const detail = function (title, poster_path, vote_average, overview){
@@ -149,3 +150,16 @@ form.addEventListener('submit', (event) => {
 })
 main.classList.add('movies')
 search.placeholder = main.classList.contains('movies') ? 'Movies Search' :'TV Show Search';
+
+const section = document.createElement('section');
+section.classList.add('splide');
+section.innerHTML = `
+        <div class="splide__track">
+            <ul class="splide__list">
+                <li class="splide__slide">Slide 01</li>
+                <li class="splide__slide">Slide 02</li>
+                <li class="splide__slide">Slide 03</li>
+            </ul>
+        </div>
+`
+main.appendChild(section);
