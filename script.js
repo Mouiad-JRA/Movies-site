@@ -22,6 +22,8 @@ document.querySelector('.movie-list').addEventListener('click',()=>{
 });
 
 const detail = function (title, poster_path, vote_average, overview){
+    window.history.pushState("", "${title}", `/${title.replace(/\s/g, '') }`);
+
     main.innerHTML = '';
     main.classList.remove('movies');
     main.classList.remove('tv-show');
@@ -54,6 +56,7 @@ const detail = function (title, poster_path, vote_average, overview){
     main.appendChild(movieEl);
     main.appendChild(overView);
     main.appendChild(rate);
+
 };
 
 
