@@ -12,6 +12,7 @@ const main = document.getElementById('main');
 const header = document.getElementById('header');
 // Get initial Movies
 getMovies(API_URL_TRENDING);
+getSlider(API_URL_TRENDING);
 document.querySelector('.show').addEventListener('click',()=>{
     search.placeholder = 'TV Show Search'
     getTvShows(API_SHOW_URL);
@@ -72,8 +73,37 @@ async function getTvShows(url) {
     const data = await res.json();
     showTvShows(data.results);
 }
+async function getSlider(url) {
+    const res = await fetch(url);
+    const data = await res.json();
+    sliderAdd(data.results);
+}
+
+function sliderAdd(movies){
+    main.innerHTML = '';
+    main.classList.remove('movies');
+    main.classList.remove('tv-show');
+    // main.classList.add('movies');
+    const sliderEL = document.createElement('div');
+    sliderEL.classList.add('slider');
+    const moveisList = []
+    movies.forEach((movie, index) => {
+        moveisList[index] = movie
+    });
+    console.log(moveisList);
+    moveisList.forEach((movie, index)=>{
+        const {title, poster_path, vote_average, overview} = movie;
+        const sliderElIN = document.createElement('div');
+        sliderElIN.innerHTML =`
+           <img class ='image' src="${IMG_PATH + poster_path}" alt="${title}" style="width: 400px; height: 500px" onclick="detail('${title}', '${poster_path}','${vote_average}','${overview}')">
+        `
+        sliderEL.appendChild(sliderElIN);
+
+    });
+    main.appendChild(sliderEL);
 
 
+}
 function showMovies(movies) {
     main.innerHTML = '';
     main.classList.remove('movies');
@@ -151,15 +181,5 @@ form.addEventListener('submit', (event) => {
 main.classList.add('movies')
 search.placeholder = main.classList.contains('movies') ? 'Movies Search' :'TV Show Search';
 
-const section = document.createElement('section');
-section.classList.add('splide');
-section.innerHTML = `
-        <div class="splide__track">
-            <ul class="splide__list">
-                <li class="splide__slide">Slide 01</li>
-                <li class="splide__slide">Slide 02</li>
-                <li class="splide__slide">Slide 03</li>
-            </ul>
-        </div>
-`
-main.appendChild(section);
+
+
