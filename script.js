@@ -11,7 +11,7 @@ const search = document.getElementById('search');
 const main = document.getElementById('main');
 const header = document.getElementById('header');
 // Get initial Movies
-getMovies(API_URL_TRENDING);
+getMovies(API_URL);
 getSlider(API_URL_TRENDING);
 document.querySelector('.show').addEventListener('click',()=>{
     search.placeholder = 'TV Show Search'
@@ -20,7 +20,7 @@ document.querySelector('.show').addEventListener('click',()=>{
 
 document.querySelector('.movie-list').addEventListener('click',()=>{
     search.placeholder = 'Movies Search'
-    getMovies(API_URL_TRENDING);
+    getMovies(API_URL);
 });
 
 const detail = function (title, poster_path, vote_average, overview){
@@ -53,7 +53,6 @@ const detail = function (title, poster_path, vote_average, overview){
     movieEl.innerHTML = `
 <img class ='movie-img' style="width: 100%; cursor: default; height: 100%" src="${IMG_PATH + poster_path}" alt="${title}">
 
- 
 `
     main.appendChild(movieEl);
     main.appendChild(overView);
@@ -101,6 +100,32 @@ function sliderAdd(movies){
 
     });
     main.appendChild(sliderEL);
+    $('.slider').slick({
+        centerMode: true,
+        centerPadding: '60px',
+        slidesToShow: 3,
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 480,
+                settings: {
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '40px',
+                    slidesToShow: 1
+                }
+            }
+        ]
+    });
+
 
 
 }

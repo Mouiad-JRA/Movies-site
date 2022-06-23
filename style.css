@@ -13,6 +13,7 @@
      background-color: var(--primary-color);
      font-family: 'Poppins' ,sans-serif;
      margin: 0;
+     max-width: 100%;
  }
  header {
      padding: 1rem;
@@ -39,8 +40,10 @@
  }
 
  main{
-     display: flex;
-     flex-wrap: wrap;
+     display: block;
+ }
+ #main {
+     margin: 0 100px;
  }
  .movie {
      width: 300px;
